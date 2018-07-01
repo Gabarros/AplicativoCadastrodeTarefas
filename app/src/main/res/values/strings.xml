@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Cadastro de Tarefas</string>
+    <string name="title_activity_lista_evento">ListaEvento</string>
+    <string name="tvnome" />
+    <string name="etduracao" />
+    <string name="etdata" />
+    <string name="btsalvar">SALVAR</string>
+    <string name="btalterar">ALTERAR</string>
+    <string name="btdeletar">DELETAR</string>
+    <string name="tvnomeevento" />
+    <string name="tvduracaotarefa" />
+    <string name="tvdatatarefa" />
+</resources>
