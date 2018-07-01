@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Cadastro de Tarefas</string>
-    <string name="title_activity_lista_evento">ListaEvento</string>
+    <string name="title_activity_lista_evento">LISTA DE TAREFAS</string>
     <string name="tvnome" />
     <string name="etduracao" />
     <string name="etdata" />
@@ -10,4 +10,6 @@
     <string name="tvnomeevento" />
     <string name="tvduracaotarefa" />
     <string name="tvdatatarefa" />
+    <string name="tvTelaInicial">Cadastro de Tarefas</string>
+    <string name="tvdados">Gabriel de Almeida Barros, v1.0</string>
 </resources>
