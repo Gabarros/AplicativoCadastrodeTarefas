@@ -12,4 +12,7 @@
     <string name="tvdatatarefa" />
     <string name="tvTelaInicial">Cadastro de Tarefas</string>
     <string name="tvdados">Gabriel de Almeida Barros, v1.0</string>
+    <string name="tvnometarefa">Nome da Tarefa:</string>
+    <string name="tvduraçãotarefa">Duração:</string>
+    <string name="tvdatatarefaitem">Data:</string>
 </resources>
