@@ -28,6 +28,8 @@ public class ListaEvento extends AppCompatActivity implements ClickRecyclerViewL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         realm = Realm.getDefaultInstance();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
