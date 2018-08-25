@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Cadastro de Tarefas</string>
+    <string name="app_name">ORGANIZER 2.0</string>
     <string name="title_activity_lista_evento">LISTA DE TAREFAS</string>
+    <string name="title_activity_lista_local">LISTA DE EVENTOS</string>
     <string name="tvnome" />
     <string name="etduracao" />
     <string name="etdata" />
@@ -15,4 +16,5 @@
     <string name="tvnometarefa">Tarefa:</string>
     <string name="tvduraçãotarefa">Categoria:</string>
     <string name="tvdatatarefaitem">Hora:</string>
+    <string name="google_maps_key">AIzaSyCMJR-F6oDvBFgrtq8RvJtxNgIyPk_9ESU</string>
 </resources>

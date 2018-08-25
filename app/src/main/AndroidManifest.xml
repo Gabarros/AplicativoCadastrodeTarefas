@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.edu.iff.pooa20181.ondeir">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -24,9 +26,15 @@
             android:label="@string/title_activity_lista_evento"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.TarefaDetalhe" />
-        <activity android:name=".activity.ListaEvento" />
-        <activity android:name=".activity.ListaLocal" />
+        <activity
+            android:name=".activity.ListaLocal"
+            android:label="@string/title_activity_lista_local"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.LocalDetalhe"></activity>
     </application>
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/google_maps_key" />
 
 </manifest>
