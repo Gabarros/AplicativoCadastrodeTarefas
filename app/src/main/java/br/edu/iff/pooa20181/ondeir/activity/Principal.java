@@ -13,8 +13,6 @@ import br.edu.iff.pooa20181.ondeir.R;
 
 public class Principal extends AppCompatActivity{
 
-    private String[] activities = {"ListaEvento"};
-    private String[] itemMenu = {"Adicionar Tarefas do Dia"};
 
     private Button btPrincipal;
 
@@ -22,7 +20,7 @@ public class Principal extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemMenu);
+
 
 
         btPrincipal = findViewById(R.id.btPrincipal);

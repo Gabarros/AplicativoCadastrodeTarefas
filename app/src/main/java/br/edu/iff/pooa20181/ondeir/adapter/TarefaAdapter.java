@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import br.edu.iff.pooa20181.ondeir.R;
@@ -43,12 +45,13 @@ public class TarefaAdapter extends RecyclerView.Adapter {
         EventoViewHolder eventoHolder = (EventoViewHolder) viewHolder;
 
         Evento evento  = this.eventos.get(position) ;
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 
         eventoHolder.nomeEvento.setText(evento.getNome());
         eventoHolder.dataEvento.setText(formato.format(evento.getData()));
-        eventoHolder.duracaoEvento.setText(String.valueOf(evento.getDuracao()));
+        eventoHolder.categoriaEvento.setText(String.valueOf(evento.getCategoria()));
 
 
     }
@@ -62,14 +65,14 @@ public class TarefaAdapter extends RecyclerView.Adapter {
 
         private final TextView nomeEvento;
         private final TextView dataEvento;
-        private final TextView duracaoEvento;
+        private final TextView categoriaEvento;
 
 
         public EventoViewHolder(View itemView) {
             super(itemView);
             nomeEvento = (TextView) itemView.findViewById(R.id.tvNomeTarefa);
             dataEvento = (TextView) itemView.findViewById(R.id.tvDataTarefa);
-            duracaoEvento = (TextView) itemView.findViewById(R.id.tvDuracaoTarefa);
+            categoriaEvento = (TextView) itemView.findViewById(R.id.tvCategoriaTarefa);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

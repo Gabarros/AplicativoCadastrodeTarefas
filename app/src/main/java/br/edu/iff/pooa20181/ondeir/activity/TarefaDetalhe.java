@@ -46,6 +46,11 @@ public class TarefaDetalhe extends AppCompatActivity {
         btalterar = (Button) findViewById(R.id.bt_alterar_evento);
         btdeletar = (Button) findViewById(R.id.bt_deletar_evento);
 
+        RadioButton rb1 = findViewById(R.id.rbEscolar);
+        RadioButton rb2 = findViewById(R.id.rbTrabalho);
+        RadioButton rb3 = findViewById(R.id.rbUrgente);
+        RadioButton rb4 = findViewById(R.id.rbLazer);
+
         radiogroup = findViewById(R.id.radiogroup);
 
 
@@ -107,7 +112,7 @@ public class TarefaDetalhe extends AppCompatActivity {
         realm.commitTransaction();
         realm.close();
 
-        Toast.makeText(this,"Evento deletado",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Tarefa Deletada",Toast.LENGTH_LONG).show();
         this.finish();
 
     }
@@ -130,7 +135,7 @@ public class TarefaDetalhe extends AppCompatActivity {
         realm.commitTransaction();
         realm.close();
 
-        Toast.makeText(this,"Evento Cadastrado",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Nova Tarefa Cadastrado Com Sucesso!!!",Toast.LENGTH_LONG).show();
         this.finish();
 
     }
@@ -150,7 +155,7 @@ public class TarefaDetalhe extends AppCompatActivity {
 
 
         try {
-            evento.setData((Date) formato.parse(etData.getText().toString()));
+            evento.setData(formato.parse(etData.getText().toString()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -168,7 +173,7 @@ public class TarefaDetalhe extends AppCompatActivity {
         realm.commitTransaction();
         realm.close();
 
-        Toast.makeText(this,"Evento Alterado",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Tarefa Alterada",Toast.LENGTH_LONG).show();
         this.finish();
 
     }

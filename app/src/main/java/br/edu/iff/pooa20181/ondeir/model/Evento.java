@@ -11,8 +11,7 @@ public class Evento extends RealmObject implements Serializable {
     @PrimaryKey
     private int id;
     private String nome;
-    private String duracao;
-    private Date data;
+    private Date  data;
     private String categoria;
 
 
@@ -20,18 +19,13 @@ public class Evento extends RealmObject implements Serializable {
     }
 
 
-    public Evento(int id, String nome, Date data, String duracao) {
+
+    public Evento(int id, String nome, String categoria, Date data) {
         this.setId(id);
         this.setNome(nome);
         this.setData(data);
+        this.setCategoria(categoria);
 
-    }
-
-    public Evento(int id, String nome, String duracao, Date data) {
-        this.setId(id);
-        this.setNome(nome);
-        this.setData(data);
-        this.setDuracao(duracao);
 
     }
 
@@ -50,14 +44,6 @@ public class Evento extends RealmObject implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(String duracao) {
-        this.duracao = duracao;
     }
 
     public Date getData() {
