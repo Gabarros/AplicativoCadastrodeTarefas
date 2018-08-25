@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,12 +53,13 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
     private boolean updatesOn = false;
 
     private Button btsalvar, btalterar, btdeletar;
+    Button geoLocationBt;
 
     int id;
     Local local;
     private Realm realm;
 
-    private EditText etLocal;
+    private EditText etLocal, etLocalEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
         btalterar = findViewById(R.id.btAlterarLocal);
         btdeletar = findViewById(R.id.btDeletarLocal);
         etLocal = findViewById(R.id.etLocal);
+        etLocalEvento = findViewById(R.id.etLocalEvento);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -100,6 +101,30 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        geoLocationBt = (Button) findViewById(R.id.btSearch);
+        geoLocationBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText searchText = (EditText) findViewById(R.id.etLocalEvento);
+                String search = searchText.getText().toString();
+                if (search != null && !search.equals("")) {
+                    List<Address> addressList = null;
+                    Geocoder geocoder = new Geocoder(LocalDetalhe.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(search, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("from geocoder"));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                }
+            }
+        });
+
+
+
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -115,6 +140,7 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
             }
         };
 
+
         Intent intent    = getIntent();
         id = (int) intent.getSerializableExtra("id");
         realm = Realm.getDefaultInstance();
@@ -128,6 +154,7 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
 
 
             etLocal.setText(local.getNome());
+            etLocalEvento.setText(local.getLocalevento());
 
 
         }else{
@@ -139,8 +166,6 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
             btdeletar.setVisibility(View.INVISIBLE);
 
         }
-
-
 
         btsalvar.setOnClickListener( new View.OnClickListener(){
 
@@ -163,6 +188,8 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
+
     }
 
     /**
@@ -178,10 +205,12 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        LatLng localIFF = new LatLng(-21.7612815, -41.3369699);
+        mMap.addMarker(new MarkerOptions().position(localIFF).title("Marker in IFF - Campus Centro"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(localIFF));
+        mMap.getMaxZoomLevel();
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -207,8 +236,6 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -228,33 +255,33 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        stopLocationUpdates();
-    }
-
-    private void stopLocationUpdates() {
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (updatesOn) startLocationUpdates();
-    }
-
-    private void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
-            }
-        }
-
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        stopLocationUpdates();
+//    }
+//
+//    private void stopLocationUpdates() {
+//        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
+//    }
+//
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (updatesOn) startLocationUpdates();
+//    }
+//
+//    private void startLocationUpdates() {
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
+//        } else {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
+//            }
+//        }
+//
+//    }
 
     public void deletar(){
         realm.beginTransaction();
@@ -293,6 +320,7 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
     private void setEGrava(Local local){
 
         local.setNome(etLocal.getText().toString());
+        local.setLocalevento(etLocalEvento.getText().toString());
 
 
     }
