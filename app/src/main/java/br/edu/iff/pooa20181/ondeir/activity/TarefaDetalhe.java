@@ -31,7 +31,7 @@ public class TarefaDetalhe extends AppCompatActivity {
     Evento evento;
     private Realm realm;
 
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
