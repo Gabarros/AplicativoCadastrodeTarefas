@@ -17,7 +17,7 @@ import br.edu.iff.pooa20181.ondeir.adapter.TarefaAdapter;
 import br.edu.iff.pooa20181.ondeir.model.Evento;
 import io.realm.Realm;
 
-public class ListaEvento extends AppCompatActivity implements ClickRecyclerViewListener {
+public class ListaTarefa extends AppCompatActivity implements ClickRecyclerViewListener {
 
     private Realm realm;
 
@@ -35,7 +35,7 @@ public class ListaEvento extends AppCompatActivity implements ClickRecyclerViewL
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListaEvento.this,TarefaDetalhe.class);
+                Intent intent = new Intent(ListaTarefa.this,TarefaDetalhe.class);
                 intent.putExtra("id",0);
                 startActivity(intent);
             }
@@ -64,7 +64,7 @@ public class ListaEvento extends AppCompatActivity implements ClickRecyclerViewL
     @Override
     public void onClick(Object object) {
         Evento evento = (Evento) object;
-        Intent intent = new Intent(ListaEvento.this,TarefaDetalhe.class);
+        Intent intent = new Intent(ListaTarefa.this,TarefaDetalhe.class);
         intent.putExtra("id",evento.getId());
         startActivity(intent);
     }

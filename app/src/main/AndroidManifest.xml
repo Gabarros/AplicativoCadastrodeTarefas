@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.edu.iff.pooa20181.ondeir">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".model.BDConfig"
@@ -19,10 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ListaEvento"
+            android:name=".activity.ListaTarefa"
             android:label="@string/title_activity_lista_evento"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.TarefaDetalhe"></activity>
+        <activity android:name=".activity.TarefaDetalhe" />
+        <activity android:name=".activity.ListaEvento" />
+        <activity android:name=".activity.ListaLocal" />
+        <activity android:name=".activity.LocalDetalhe"></activity>
     </application>
 
 </manifest>
