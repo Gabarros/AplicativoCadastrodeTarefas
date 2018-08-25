@@ -86,7 +86,10 @@ public class TarefaDetalhe extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                salvar();
+
+                    salvar();
+
+
             }
         });
         btalterar.setOnClickListener( new View.OnClickListener(){
@@ -104,6 +107,10 @@ public class TarefaDetalhe extends AppCompatActivity {
         });
 
 
+    }
+
+    public void erro(){
+        Toast.makeText(this, "Os Campos devem ser preenchidos", Toast.LENGTH_SHORT);
     }
 
     public void deletar(){

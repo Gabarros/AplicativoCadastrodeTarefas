@@ -171,7 +171,10 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onClick(View view) {
-                salvar();
+
+                    salvar();
+
+
             }
         });
         btalterar.setOnClickListener( new View.OnClickListener(){
@@ -209,8 +212,9 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
 
         LatLng localIFF = new LatLng(-21.7612815, -41.3369699);
         mMap.addMarker(new MarkerOptions().position(localIFF).title("Marker in IFF - Campus Centro"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(localIFF));
-        mMap.getMaxZoomLevel();
+        float zoomLevel = 16.0f; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localIFF, zoomLevel));
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -252,6 +256,10 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
                 }
                 break;
         }
+    }
+
+    public void erro(){
+        Toast.makeText(this,"Os Campos Devem ser Preenchidos!",Toast.LENGTH_LONG).show();
     }
 
 
@@ -302,7 +310,6 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
             proximoID = realm.where(Local.class).max("id").intValue()+1;
 
 
-
         realm.beginTransaction();
         Local local = new Local();
         local.setId(proximoID);
@@ -321,6 +328,8 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
 
         local.setNome(etLocal.getText().toString());
         local.setLocalevento(etLocalEvento.getText().toString());
+        local.setLatitude(myLatitude);
+        local.setLongitude(myLongitude);
 
 
     }

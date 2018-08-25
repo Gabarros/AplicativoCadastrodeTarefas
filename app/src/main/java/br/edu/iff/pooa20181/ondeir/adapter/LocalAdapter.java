@@ -50,6 +50,7 @@ public class LocalAdapter extends RecyclerView.Adapter {
 
 
         localHolder.nomeLocal.setText(local.getNome());
+        localHolder.enderecoLocal.setText(local.getLocalevento());
 
     }
     @Override
@@ -60,12 +61,15 @@ public class LocalAdapter extends RecyclerView.Adapter {
     public class LocalViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView nomeLocal;
+        private final TextView enderecoLocal;
 
 
 
         public LocalViewHolder(View itemView) {
             super(itemView);
             nomeLocal = (TextView) itemView.findViewById(R.id.tvLocal);
+            enderecoLocal = itemView.findViewById(R.id.tvEnderecoLocal);
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

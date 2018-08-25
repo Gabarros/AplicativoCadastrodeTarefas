@@ -11,8 +11,8 @@ public class Local extends RealmObject implements Serializable {
     private int id;
 
     private String nome;
-    private Long latitude;
-    private Long longitude;
+    private Double latitude;
+    private Double longitude;
     private String localevento;
 
     public Local(){
@@ -44,11 +44,18 @@ public class Local extends RealmObject implements Serializable {
         this.localevento = localevento;
     }
 
-    public void setLatitude(Long latitude) {
+    public Double getLatitute(){
+        return latitude;
+    }
+
+    public Double getLongitude(){
+        return longitude;
+    }
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 }
