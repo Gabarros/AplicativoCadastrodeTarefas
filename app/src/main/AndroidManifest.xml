@@ -30,11 +30,12 @@
             android:name=".activity.ListaLocal"
             android:label="@string/title_activity_lista_local"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.LocalDetalhe"></activity>
+        <activity android:name=".activity.LocalDetalhe" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="@string/google_maps_key" />
 
 </manifest>

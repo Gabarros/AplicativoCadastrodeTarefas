@@ -35,7 +35,7 @@ public class LocalAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_tarefa_cv, parent, false);
+                .inflate(R.layout.item_local_cv, parent, false);
         LocalViewHolder localViewHolder = new LocalViewHolder(view);
         return localViewHolder;
     }
@@ -65,7 +65,7 @@ public class LocalAdapter extends RecyclerView.Adapter {
 
         public LocalViewHolder(View itemView) {
             super(itemView);
-            nomeLocal = (TextView) itemView.findViewById(R.id.tvNomeTarefa);
+            nomeLocal = (TextView) itemView.findViewById(R.id.tvLocal);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

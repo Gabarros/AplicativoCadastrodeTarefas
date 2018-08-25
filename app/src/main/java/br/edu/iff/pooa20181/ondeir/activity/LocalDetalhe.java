@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,18 +30,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
+import io.realm.Realm;
 import br.edu.iff.pooa20181.ondeir.R;
+import br.edu.iff.pooa20181.ondeir.model.Evento;
+import br.edu.iff.pooa20181.ondeir.model.Local;
 
 
 public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     ZoomControls zoom;
-    Button markBt;
-    Button geoLocationBt;
-    Button satView;
-    Button clear;
+
     Double myLatitude = null;
     Double myLongitude = null;
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -51,10 +53,23 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
     protected static final String TAG = "MapsActvity";
     private boolean updatesOn = false;
 
+    private Button btsalvar, btalterar, btdeletar;
+
+    int id;
+    Local local;
+    private Realm realm;
+
+    private EditText etLocal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_detalhe);
+
+        btsalvar = findViewById(R.id.btOkLocal);
+        btalterar = findViewById(R.id.btAlterarLocal);
+        btdeletar = findViewById(R.id.btDeletarLocal);
+        etLocal = findViewById(R.id.etLocal);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -99,6 +114,50 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         };
+
+        if (id !=0) {
+            btsalvar.setEnabled(false);
+            btsalvar.setClickable(false);
+            btsalvar.setVisibility(View.INVISIBLE);
+
+            local = realm.where(Local.class).equalTo("id",id).findFirst();
+
+
+            etLocal.setText(local.getNome());
+
+
+        }else{
+            btalterar.setEnabled(false);
+            btalterar.setClickable(false);
+            btalterar.setVisibility(View.INVISIBLE);
+            btdeletar.setEnabled(false);
+            btdeletar.setClickable(false);
+            btdeletar.setVisibility(View.INVISIBLE);
+
+        }
+
+
+
+        btsalvar.setOnClickListener( new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                salvar();
+            }
+        });
+        btalterar.setOnClickListener( new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                alterar();
+            }
+        });
+        btdeletar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                deletar();
+            }
+        });
 
     }
 
@@ -192,6 +251,63 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+
+    public void deletar(){
+        realm.beginTransaction();
+        local.deleteFromRealm();
+        realm.commitTransaction();
+        realm.close();
+
+        Toast.makeText(this,"Tarefa Deletada",Toast.LENGTH_LONG).show();
+        this.finish();
+
+    }
+
+    public void salvar() {
+
+
+        int proximoID = 1;
+        if(realm.where(Local.class).max("id") !=null)
+            proximoID = realm.where(Local.class).max("id").intValue()+1;
+
+
+
+        realm.beginTransaction();
+        Local local = new Local();
+        local.setId(proximoID);
+        setEGrava(local);
+
+        realm.copyToRealm(local);
+        realm.commitTransaction();
+        realm.close();
+
+        Toast.makeText(this,"Novo Local Cadastrado Com Sucesso!!!",Toast.LENGTH_LONG).show();
+        this.finish();
+
+    }
+
+    private void setEGrava(Local local){
+
+        local.setNome(etLocal.getText().toString());
+
+
+    }
+    public void alterar() {
+
+        realm.beginTransaction();
+
+        setEGrava(local);
+
+        realm.copyToRealm(local);
+        realm.commitTransaction();
+        realm.close();
+
+        Toast.makeText(this,"Local Alterado",Toast.LENGTH_LONG).show();
+        this.finish();
+
+    }
+
+
 
 
 
