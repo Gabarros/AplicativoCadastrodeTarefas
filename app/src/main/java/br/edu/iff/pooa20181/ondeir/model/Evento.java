@@ -13,6 +13,7 @@ public class Evento extends RealmObject implements Serializable {
     private String nome;
     private String duracao;
     private Date data;
+    private String categoria;
 
 
     public Evento() {
@@ -65,5 +66,13 @@ public class Evento extends RealmObject implements Serializable {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

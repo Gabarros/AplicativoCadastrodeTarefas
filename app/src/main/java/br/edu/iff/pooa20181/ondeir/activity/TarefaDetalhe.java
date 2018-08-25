@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -20,9 +22,10 @@ import io.realm.Realm;
 
 public class TarefaDetalhe extends AppCompatActivity {
 
-    EditText etNome, etDuracao, etData;
+    EditText etNome,etData;
 
     Button btsalvar,btalterar, btdeletar;
+    RadioGroup radiogroup;
 
     int id;
     Evento evento;
@@ -37,12 +40,15 @@ public class TarefaDetalhe extends AppCompatActivity {
         setContentView(R.layout.activity_evento_detalhe);
 
         etNome = (EditText)findViewById(R.id.etNome);
-        etDuracao = (EditText)findViewById(R.id.etDuracao);
         etData = (EditText)findViewById(R.id.etData);
 
         btsalvar = (Button) findViewById(R.id.bt_salvar_evento);
         btalterar = (Button) findViewById(R.id.bt_alterar_evento);
         btdeletar = (Button) findViewById(R.id.bt_deletar_evento);
+
+        radiogroup = findViewById(R.id.radiogroup);
+
+
 
         Intent intent    = getIntent();
         id = (int) intent.getSerializableExtra("id");
@@ -57,7 +63,6 @@ public class TarefaDetalhe extends AppCompatActivity {
 
 
             etNome.setText(evento.getNome());
-            etDuracao.setText(evento.getDuracao());
             etData.setText(formato.format((Date) evento.getData()));
 
         }else{
@@ -114,6 +119,8 @@ public class TarefaDetalhe extends AppCompatActivity {
         if(realm.where(Evento.class).max("id") !=null)
             proximoID = realm.where(Evento.class).max("id").intValue()+1;
 
+
+
         realm.beginTransaction();
         Evento evento = new Evento();
         evento.setId(proximoID);
@@ -130,8 +137,15 @@ public class TarefaDetalhe extends AppCompatActivity {
 
     private void setEGrava(Evento evento){
 
+        int radioButtonID = radiogroup.getCheckedRadioButtonId();
+        View radioButton = radiogroup.findViewById(radioButtonID);
+        int idx = radiogroup.indexOfChild(radioButton);
+
+        RadioButton r = (RadioButton)  radiogroup.getChildAt(idx);
+        String selectedtext = r.getText().toString();
+
         evento.setNome(etNome.getText().toString());
-        evento.setDuracao(etDuracao.getText().toString());
+        evento.setCategoria(selectedtext);
 
 
 
