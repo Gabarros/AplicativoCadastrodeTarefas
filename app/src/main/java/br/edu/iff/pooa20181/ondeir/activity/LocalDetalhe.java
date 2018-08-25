@@ -1,6 +1,7 @@
 package br.edu.iff.pooa20181.ondeir.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -35,7 +36,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import br.edu.iff.pooa20181.ondeir.R;
-import br.edu.iff.pooa20181.ondeir.model.Evento;
 import br.edu.iff.pooa20181.ondeir.model.Local;
 
 
@@ -114,6 +114,10 @@ public class LocalDetalhe extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         };
+
+        Intent intent    = getIntent();
+        id = (int) intent.getSerializableExtra("id");
+        realm = Realm.getDefaultInstance();
 
         if (id !=0) {
             btsalvar.setEnabled(false);
