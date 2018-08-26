@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ORGANIZER 2.0</string>
+    <string name="app_name">ORGANIZER</string>
     <string name="title_activity_lista_evento">LISTA DE TAREFAS</string>
     <string name="title_activity_lista_local">LISTA DE EVENTOS</string>
     <string name="tvnome" />

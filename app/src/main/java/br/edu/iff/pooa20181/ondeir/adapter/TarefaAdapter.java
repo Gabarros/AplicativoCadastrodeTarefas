@@ -46,7 +46,7 @@ public class TarefaAdapter extends RecyclerView.Adapter {
 
         Evento evento  = this.eventos.get(position) ;
 
-        DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formato = new SimpleDateFormat("dd/MM");
 
 
         eventoHolder.nomeEvento.setText(evento.getNome());

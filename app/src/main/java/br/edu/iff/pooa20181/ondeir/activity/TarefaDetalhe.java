@@ -20,7 +20,7 @@ import br.edu.iff.pooa20181.ondeir.R;
 import br.edu.iff.pooa20181.ondeir.model.Evento;
 import io.realm.Realm;
 
-public class TarefaDetalhe extends AppCompatActivity {
+public class TarefaDetalhe extends AppCompatActivity{
 
     EditText etNome,etData;
 
@@ -31,7 +31,10 @@ public class TarefaDetalhe extends AppCompatActivity {
     Evento evento;
     private Realm realm;
 
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+
+
+
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM");
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -52,6 +55,7 @@ public class TarefaDetalhe extends AppCompatActivity {
         RadioButton rb4 = findViewById(R.id.rbLazer);
 
         radiogroup = findViewById(R.id.radiogroup);
+
 
 
 
@@ -79,7 +83,6 @@ public class TarefaDetalhe extends AppCompatActivity {
             btdeletar.setVisibility(View.INVISIBLE);
 
         }
-
 
 
         btsalvar.setOnClickListener( new View.OnClickListener(){
